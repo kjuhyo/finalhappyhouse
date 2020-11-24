@@ -33,7 +33,7 @@
 
     <base-material-card
       icon="mdi-clipboard-text"
-      title="아파트 거래정보"
+      title="주택 거래정보"
       class="px-5 py-3"
     >
       <v-simple-table>
@@ -48,7 +48,7 @@
         </thead>
 
         <tbody>
-          <tr v-for="(item, index) in apt" :key="index">
+          <tr v-for="(item, index) in villa" :key="index">
             <td>{{ item.dong }}</td>
             <td>{{ item.name }}</td>
             <td>{{ item.amount }}</td>
@@ -70,7 +70,7 @@ export default {
       sido: [],
       gugun: [],
       dong: [],
-      apt: [{ dong: "여백의미", name: "", amount: "", area: "", floor: "" }],
+      villa: [{ dong: "여백의미", name: "", amount: "", area: "", floor: "" }],
       sisel: "",
       searchtext: "",
       gugunsel: "",
@@ -78,7 +78,7 @@ export default {
     };
   },
   created: function () {
-    const API_URL = "http://localhost:8080/VueApi/api/apt/sido";
+    const API_URL = "http://localhost:8080/VueApi/api/villa/sido";
     axios
       .get(API_URL)
       .then((response) => {
@@ -98,13 +98,13 @@ export default {
   methods: {
     findname: function () {
       const API_URL =
-        "http://localhost:8080/VueApi/api/apt/name/" + this.searchtext;
+        "http://localhost:8080/VueApi/api/villa/name/" + this.searchtext;
 
       axios
         .get(API_URL)
         .then((response) => {
           console.log(response);
-          this.apt = response.data;
+          this.villa = response.data;
         })
         .catch((error) => {
           console.log(error);
@@ -120,7 +120,7 @@ export default {
           param1 = a.sidoCode;
         }
       });
-      const API_URL = "http://localhost:8080/VueApi/api/apt/gugun/" + param1;
+      const API_URL = "http://localhost:8080/VueApi/api/villa/gugun/" + param1;
 
       axios
         .get(API_URL)
@@ -137,7 +137,7 @@ export default {
         });
     },
     gugunsel: function (val) {
-      const API_URL = "http://localhost:8080/VueApi/api/apt/dong/" + val;
+      const API_URL = "http://localhost:8080/VueApi/api/villa/dong/" + val;
 
       axios
         .get(API_URL)
@@ -154,13 +154,13 @@ export default {
         });
     },
     dongsel: function (val) {
-      const API_URL = "http://localhost:8080/VueApi/api/apt/ddong/" + val;
+      const API_URL = "http://localhost:8080/VueApi/api/villa/ddong/" + val;
 
       axios
         .get(API_URL)
         .then((response) => {
           console.log(response);
-          this.apt = response.data;
+          this.villa = response.data;
         })
         .catch((error) => {
           console.log(error);

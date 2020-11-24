@@ -52,7 +52,7 @@ public class VillaController {
 		return new ResponseEntity<List<VillaInfoDto>>(VillaService.getDongInGugun(gugun), HttpStatus.OK);
 	}
 	@ApiOperation(value = "동안에 빌라", response = List.class)
-	@GetMapping("/dong/{dong}")
+	@GetMapping("/ddong/{dong}")
 	public ResponseEntity<List<VillaInfoDto>> getAptInDong(@PathVariable String dong) {
 		logger.debug("getGugunInSido - 호출");
 		return new ResponseEntity<List<VillaInfoDto>>(VillaService.getVillaInDong(dong), HttpStatus.OK);
@@ -61,6 +61,7 @@ public class VillaController {
 	@GetMapping("/name/{name}")
 	public ResponseEntity<List<VillaInfoDto>> getAptName(@PathVariable String name) {
 		logger.debug("getGugunInSido - 호출");
+		name = "%"+name +"%";
 		return new ResponseEntity<List<VillaInfoDto>>(VillaService.getVillaName(name), HttpStatus.OK);
 	}
 	@ApiOperation(value = "전체 빌라", response = List.class)
