@@ -12,11 +12,11 @@
         <base-material-card>
           <template v-slot:heading>
             <div class="display-2 font-weight-light">
-              Edit Profile
+              정보 수정
             </div>
 
             <div class="subtitle-1 font-weight-light">
-              Complete your profile
+              Edit Profile
             </div>
           </template>
 
@@ -25,30 +25,10 @@
               <v-row>
                 <v-col
                   cols="12"
-                  md="4"
+                  md="6"
                 >
                   <v-text-field
-                    label="Company (disabled)"
-                    disabled
-                  />
-                </v-col>
-
-                <v-col
-                  cols="12"
-                  md="4"
-                >
-                  <v-text-field
-                    class="purple-input"
-                    label="User Name"
-                  />
-                </v-col>
-
-                <v-col
-                  cols="12"
-                  md="4"
-                >
-                  <v-text-field
-                    label="Email Address"
+                    label="User Id"
                     class="purple-input"
                   />
                 </v-col>
@@ -58,31 +38,21 @@
                   md="6"
                 >
                   <v-text-field
-                    label="First Name"
-                    class="purple-input"
-                  />
-                </v-col>
-
-                <v-col
-                  cols="12"
-                  md="6"
-                >
-                  <v-text-field
-                    label="Last Name"
+                    label="User Password"
                     class="purple-input"
                   />
                 </v-col>
 
                 <v-col cols="12">
                   <v-text-field
-                    label="Adress"
+                    label="E-mail"
                     class="purple-input"
                   />
                 </v-col>
 
                 <v-col
                   cols="12"
-                  md="4"
+                  md="6"
                 >
                   <v-text-field
                     label="City"
@@ -92,33 +62,13 @@
 
                 <v-col
                   cols="12"
-                  md="4"
+                  md="6"
                 >
                   <v-text-field
                     label="Country"
                     class="purple-input"
                   />
                 </v-col>
-
-                <v-col
-                  cols="12"
-                  md="4"
-                >
-                  <v-text-field
-                    class="purple-input"
-                    label="Postal Code"
-                    type="number"
-                  />
-                </v-col>
-
-                <v-col cols="12">
-                  <v-textarea
-                    class="purple-input"
-                    label="About Me"
-                    value="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-                  />
-                </v-col>
-
                 <v-col
                   cols="12"
                   class="text-right"
@@ -127,7 +77,13 @@
                     color="success"
                     class="mr-0"
                   >
-                    Update Profile
+                    수정
+                  </v-btn>
+                  <v-btn
+                    color="success"
+                    class="mr-0"
+                  >
+                    탈퇴
                   </v-btn>
                 </v-col>
               </v-row>
@@ -146,24 +102,11 @@
         >
           <v-card-text class="text-center">
             <h6 class="display-1 mb-1 grey--text">
-              CEO / CO-FOUNDER
+              happy house VIP
             </h6>
-
             <h4 class="display-2 font-weight-light mb-3 black--text">
-              Alec Thompson
+              아이디
             </h4>
-
-            <p class="font-weight-light grey--text">
-              Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...
-            </p>
-
-            <v-btn
-              color="success"
-              rounded
-              class="mr-0"
-            >
-              Follow
-            </v-btn>
           </v-card-text>
         </base-material-card>
       </v-col>
