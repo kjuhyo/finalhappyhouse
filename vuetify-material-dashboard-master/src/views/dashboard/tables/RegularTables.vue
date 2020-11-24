@@ -4,9 +4,15 @@
     <v-container>
       <v-row>
         <v-col cols="7"></v-col>
-        <v-col><v-select :items="sido" label="시도"></v-select></v-col>
-        <v-col><v-select :items="gugun" label="구군"></v-select></v-col>
-        <v-col><v-select :items="dong" label="동"></v-select></v-col>
+        <v-col
+          ><v-select v-model="sisel" :items="sido" label="시도"></v-select
+        ></v-col>
+        <v-col
+          ><v-select v-model="gugunsel" :items="gugun" label="구군"></v-select
+        ></v-col>
+        <v-col
+          ><v-select v-model="dongsel" :items="dong" label="동"></v-select
+        ></v-col>
         <v-col>
           <v-text-field
             :label="$t('search')"
@@ -95,12 +101,17 @@
 </template>
 <script>
 import axios from "axios";
+var sidores = [];
+
 export default {
   data() {
     return {
       sido: [],
       gugun: [],
       dong: [],
+      sisel: "",
+      gugunsel: "",
+      dongsel: "",
     };
   },
   created: function () {
@@ -109,11 +120,62 @@ export default {
       .get(API_URL)
       .then((response) => {
         console.log(response);
-        this.sido = response.data;
+        const sisi = [];
+        sidores = response.data;
+        response.data.forEach((element) => {
+          sisi.push(element.sidoName);
+        });
+        console.log(sisi);
+        this.sido = sisi;
       })
       .catch((error) => {
         console.log(error);
       });
+  },
+
+  watch: {
+    sisel: function (val) {
+      var param1 = "";
+      sidores.forEach((a) => {
+        if (a.sidoName == val) {
+          param1 = a.sidoCode;
+        }
+      });
+      const API_URL = "http://localhost:8080/VueApi/api/apt/gugun/" + param1;
+
+      axios
+        .get(API_URL)
+        .then((response) => {
+          console.log(response);
+          const sisi = [];
+          response.data.forEach((element) => {
+            sisi.push(element.sidoName);
+          });
+          console.log(sisi);
+          this.gugun = sisi;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    gugunsel: function (val) {
+      const API_URL = "http://localhost:8080/VueApi/api/apt/dong/" + val;
+
+      axios
+        .get(API_URL)
+        .then((response) => {
+          console.log(response);
+          const sisi = [];
+          response.data.forEach((element) => {
+            sisi.push(element.dong);
+          });
+          console.log(sisi);
+          this.dong = sisi;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
   },
 };
 </script>
