@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace는 반드시 interface를 따라야 한다 -->
+<!-- namespace : package + classname -->
+<mapper namespace="com.ssafy.vue.dao.VillaDao">
+
+
+
+   <!-- 내부에 쿼리 작성 -->
+   <select id ="getSido" resultType="SidoGugunCodeDto">
+		SELECT left(sido_code,2) sido_code, sido_name FROM sidocode
+   </select>
+   
+   <select id = "getGugunInSido" parameterType = "string" resultType ="SidoGugunCodeDto">
+   		SELECT left(gugun_code,5) gugun_code, gugun_name FROM guguncode where left(gugun_code,2) = #{sido} ORDER BY gugun_code
+   </select>
+   
+   <select id = "getDongInGugun" parameterType = "string" resultType ="VillaInfoDto">
+   		SELECT distinct dong FROM villadeal where gugun = #{gugun} ORDER BY dong
+   </select>
+   
+   <select id = "getAllVilla" resultType ="VillaInfoDto">
+   		SELECT amount,area,bunzi,dong,floor,name,villaid FROM villadeal ORDER BY name
+   </select>
+   
+   <select id = "getVillaInDong" parameterType = "string" resultType ="VillaInfoDto">
+   		SELECT amount,area,bunzi,dong,floor,name,villaid FROM villadeal WHERE dong = #{dong} ORDER BY name
+   </select>
+   
+   <select id = "getVillaName" parameterType = "string" resultType ="VillaInfoDto">
+   		SELECT amount,area,bunzi,dong,floor,name,villaid FROM villadeal WHERE name Like #{VillaName} 
+<!--   		aptname을 %아파트이름% 이렇게 보내야 해여 		 -->
+   </select>
+
+</mapper>
+
