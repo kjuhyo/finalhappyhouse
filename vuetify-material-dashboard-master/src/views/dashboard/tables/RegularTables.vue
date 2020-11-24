@@ -16,12 +16,13 @@
         <v-col>
           <v-text-field
             :label="$t('search')"
+            v-model="searchtext"
             color="secondary"
             hide-details
             style="max-width: 165px"
           >
             <template v-if="$vuetify.breakpoint.mdAndUp" v-slot:append-outer>
-              <v-btn class="mt-n2" elevation="1" fab small>
+              <v-btn class="mt-n2" @click="findname" elevation="1" fab small>
                 <v-icon>mdi-magnify</v-icon>
               </v-btn>
             </template>
@@ -71,6 +72,7 @@ export default {
       dong: [],
       apt: [],
       sisel: "",
+      searchtext: "",
       gugunsel: "",
       dongsel: "",
     };
@@ -92,6 +94,22 @@ export default {
       .catch((error) => {
         console.log(error);
       });
+  },
+  methods: {
+    findname: function () {
+      const API_URL =
+        "http://localhost:8080/VueApi/api/apt/name/" + this.searchtext;
+
+      axios
+        .get(API_URL)
+        .then((response) => {
+          console.log(response);
+          this.apt = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
   },
 
   watch: {

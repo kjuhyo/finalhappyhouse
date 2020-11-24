@@ -61,6 +61,7 @@ public class AptController {
 	@GetMapping("/name/{name}")
 	public ResponseEntity<List<AptInfoDto>> getAptName(@PathVariable String name) {
 		logger.debug("getGugunInSido - 호출");
+		name = "%" + name + "%";
 		return new ResponseEntity<List<AptInfoDto>>(AptServiceImpl.getAptName(name), HttpStatus.OK);
 	}
 	@ApiOperation(value = "전체 아파트", response = List.class)
