@@ -1,51 +1,28 @@
 <template>
-  <v-container
-    id="regular-tables"
-    fluid
-    tag="section"
-  >
-    <base-v-component
-      heading="Simple Tables"
-      link="components/simple-tables"
-    />
-  <v-container>
-    <v-row>
-      <v-col cols = "7"></v-col>
-      <v-col><v-select
-          :items="items"
-          label="시도"
-        ></v-select></v-col>
-      <v-col><v-select
-          :items="items"
-          label="구군"
-        ></v-select></v-col>
-      <v-col><v-select
-          :items="items"
-          label="동"
-        ></v-select></v-col>
-      <v-col>  <v-text-field
-      :label="$t('search')"
-      color="secondary"
-      hide-details
-      style="max-width: 165px;"
-    >
-      <template
-        v-if="$vuetify.breakpoint.mdAndUp"
-        v-slot:append-outer
-      >
-        <v-btn
-          class="mt-n2"
-          elevation="1"
-          fab
-          small
-        >
-          <v-icon>mdi-magnify</v-icon>
-        </v-btn>
-      </template>
-    </v-text-field>
-     </v-col>
-        </v-row>
-  </v-container>
+  <v-container id="regular-tables" fluid tag="section">
+    <base-v-component heading="Simple Tables" link="components/simple-tables" />
+    <v-container>
+      <v-row>
+        <v-col cols="7"></v-col>
+        <v-col><v-select :items="sido" label="시도"></v-select></v-col>
+        <v-col><v-select :items="gugun" label="구군"></v-select></v-col>
+        <v-col><v-select :items="dong" label="동"></v-select></v-col>
+        <v-col>
+          <v-text-field
+            :label="$t('search')"
+            color="secondary"
+            hide-details
+            style="max-width: 165px"
+          >
+            <template v-if="$vuetify.breakpoint.mdAndUp" v-slot:append-outer>
+              <v-btn class="mt-n2" elevation="1" fab small>
+                <v-icon>mdi-magnify</v-icon>
+              </v-btn>
+            </template>
+          </v-text-field>
+        </v-col>
+      </v-row>
+    </v-container>
 
     <base-material-card
       icon="mdi-clipboard-text"
@@ -55,21 +32,11 @@
       <v-simple-table>
         <thead>
           <tr>
-            <th class="primary--text">
-              ID
-            </th>
-            <th class="primary--text">
-              Name
-            </th>
-            <th class="primary--text">
-              Country
-            </th>
-            <th class="primary--text">
-              City
-            </th>
-            <th class="text-right primary--text">
-              Salary
-            </th>
+            <th class="primary--text">ID</th>
+            <th class="primary--text">Name</th>
+            <th class="primary--text">Country</th>
+            <th class="primary--text">City</th>
+            <th class="text-right primary--text">Salary</th>
           </tr>
         </thead>
 
@@ -79,9 +46,7 @@
             <td>Dakota Rice</td>
             <td>Niger</td>
             <td>Oud-Turnhout</td>
-            <td class="text-right">
-              $36,738
-            </td>
+            <td class="text-right">$36,738</td>
           </tr>
 
           <tr>
@@ -89,9 +54,7 @@
             <td>Minverva Hooper</td>
             <td>Curaçao</td>
             <td>Sinaas-Waas</td>
-            <td class="text-right">
-              $23,789
-            </td>
+            <td class="text-right">$23,789</td>
           </tr>
 
           <tr>
@@ -99,9 +62,7 @@
             <td>Sage Rodriguez</td>
             <td>Netherlands</td>
             <td>Baileux</td>
-            <td class="text-right">
-              $56,142
-            </td>
+            <td class="text-right">$56,142</td>
           </tr>
 
           <tr>
@@ -109,9 +70,7 @@
             <td>Philip Chaney</td>
             <td>Korea, South</td>
             <td>Overland Park</td>
-            <td class="text-right">
-              $38,735
-            </td>
+            <td class="text-right">$38,735</td>
           </tr>
 
           <tr>
@@ -119,9 +78,7 @@
             <td>Doris Greene</td>
             <td>Malawi</td>
             <td>Feldkirchen in Kärnten</td>
-            <td class="text-right">
-              $63,542
-            </td>
+            <td class="text-right">$63,542</td>
           </tr>
 
           <tr>
@@ -129,13 +86,34 @@
             <td>Mason Porter</td>
             <td>Chile</td>
             <td>Gloucester</td>
-            <td class="text-right">
-              $78,615
-            </td>
+            <td class="text-right">$78,615</td>
           </tr>
         </tbody>
       </v-simple-table>
     </base-material-card>
-
   </v-container>
 </template>
+<script>
+import axios from "axios";
+export default {
+  data() {
+    return {
+      sido: [],
+      gugun: [],
+      dong: [],
+    };
+  },
+  created: function () {
+    const API_URL = "http://localhost:8080/VueApi/api/apt/sido";
+    axios
+      .get(API_URL)
+      .then((response) => {
+        console.log(response);
+        this.sido = response.data;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
+};
+</script>
