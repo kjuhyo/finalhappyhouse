@@ -38,61 +38,21 @@
       <v-simple-table>
         <thead>
           <tr>
-            <th class="primary--text">ID</th>
-            <th class="primary--text">Name</th>
-            <th class="primary--text">Country</th>
-            <th class="primary--text">City</th>
-            <th class="text-right primary--text">Salary</th>
+            <th class="primary--text">동</th>
+            <th class="primary--text">이름</th>
+            <th class="primary--text">가격</th>
+            <th class="primary--text">크기</th>
+            <th class="text-right primary--text">층</th>
           </tr>
         </thead>
 
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>Dakota Rice</td>
-            <td>Niger</td>
-            <td>Oud-Turnhout</td>
-            <td class="text-right">$36,738</td>
-          </tr>
-
-          <tr>
-            <td>2</td>
-            <td>Minverva Hooper</td>
-            <td>Curaçao</td>
-            <td>Sinaas-Waas</td>
-            <td class="text-right">$23,789</td>
-          </tr>
-
-          <tr>
-            <td>3</td>
-            <td>Sage Rodriguez</td>
-            <td>Netherlands</td>
-            <td>Baileux</td>
-            <td class="text-right">$56,142</td>
-          </tr>
-
-          <tr>
-            <td>4</td>
-            <td>Philip Chaney</td>
-            <td>Korea, South</td>
-            <td>Overland Park</td>
-            <td class="text-right">$38,735</td>
-          </tr>
-
-          <tr>
-            <td>5</td>
-            <td>Doris Greene</td>
-            <td>Malawi</td>
-            <td>Feldkirchen in Kärnten</td>
-            <td class="text-right">$63,542</td>
-          </tr>
-
-          <tr>
-            <td>6</td>
-            <td>Mason Porter</td>
-            <td>Chile</td>
-            <td>Gloucester</td>
-            <td class="text-right">$78,615</td>
+          <tr v-for="(item, index) in apt" :key="index">
+            <td>{{ item.dong }}</td>
+            <td>{{ item.name }}</td>
+            <td>{{ item.amount }}</td>
+            <td>{{ item.area }}</td>
+            <td class="text-right">{{ item.floor }}</td>
           </tr>
         </tbody>
       </v-simple-table>
@@ -109,6 +69,7 @@ export default {
       sido: [],
       gugun: [],
       dong: [],
+      apt: [],
       sisel: "",
       gugunsel: "",
       dongsel: "",
@@ -151,7 +112,6 @@ export default {
           response.data.forEach((element) => {
             sisi.push(element.sidoName);
           });
-          console.log(sisi);
           this.gugun = sisi;
         })
         .catch((error) => {
@@ -169,8 +129,20 @@ export default {
           response.data.forEach((element) => {
             sisi.push(element.dong);
           });
-          console.log(sisi);
           this.dong = sisi;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    dongsel: function (val) {
+      const API_URL = "http://localhost:8080/VueApi/api/apt/ddong/" + val;
+
+      axios
+        .get(API_URL)
+        .then((response) => {
+          console.log(response);
+          this.apt = response.data;
         })
         .catch((error) => {
           console.log(error);
