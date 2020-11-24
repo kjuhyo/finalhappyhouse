@@ -3,6 +3,14 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
+const requireAuth = () => (to, from, next) => {
+  const nextRoute = to.path;
+
+  if (store.getters.getAccessToken) {
+    return next();
+  } else next("/login" + nextRoute);
+};
+
 export default new Router({
   mode: 'hash',
   base: process.env.BASE_URL,
