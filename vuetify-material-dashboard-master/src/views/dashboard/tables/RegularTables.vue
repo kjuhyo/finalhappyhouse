@@ -70,7 +70,7 @@ export default {
       sido: [],
       gugun: [],
       dong: [],
-      apt: [],
+      apt: [{ dong: "여백의미", name: "", amount: "", area: "", floor: "" }],
       sisel: "",
       searchtext: "",
       gugunsel: "",
