@@ -31,7 +31,7 @@
           contain
         >
           <v-img
-            src="https://demos.creative-tim.com/vuetify-material-dashboard/favicon.ico"
+            src="https://dcassetcdn.com/design_img/3198855/647309/647309_17712397_3198855_fb929484_image.jpg"
             max-height="30"
           />
         </v-list-item-avatar>
@@ -39,7 +39,7 @@
         <v-list-item-content>
           <v-list-item-title
             class="display-1"
-            v-text="profile.title"
+            color="white"
           />
         </v-list-item-content>
       </v-list-item>
@@ -108,12 +108,12 @@
       items: [
         {
           icon: 'mdi-view-dashboard',
-          title: 'dashboard',
+          title: '소개',
           to: '/',
         },
         {
           icon: 'mdi-account',
-          title: 'user',
+          title: '마이페이지',
           to: '/pages/user',
         },
         {
@@ -122,22 +122,12 @@
           to: '/tables/regular-tables',
         },
         {
-          title: 'typography',
-          icon: 'mdi-format-font',
-          to: '/components/typography',
-        },
-        {
-          title: 'icons',
-          icon: 'mdi-chart-bubble',
-          to: '/components/icons',
-        },
-        {
           title: 'google',
           icon: 'mdi-map-marker',
           to: '/maps/google-maps',
         },
         {
-          title: 'notifications',
+          title: '공지사항',
           icon: 'mdi-bell',
           to: '/components/notifications',
         },
