@@ -51,6 +51,10 @@ export default {
   },
   methods: {
     changeplace: function () {
+      if (this.place == "") {
+        this.place = "대한민국";
+      }
+
       this.sauce = this.basic + this.place;
     },
   },
