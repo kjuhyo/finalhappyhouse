@@ -29,11 +29,11 @@
           md="auto"
         >
           <div class="body-1 font-weight-light pt-6 pt-md-0 text-center">
-            &copy; 2019, made with
+            &copy; 2020, made with
             <v-icon size="18">
               mdi-heart
             </v-icon>
-            by <a href="https://www.creative-tim.com">Creative Tim</a> for a better web.
+            by <a href="https://www.ssafy.com">SSAFY4기광주</a>
           </div>
         </v-col>
       </v-row>
@@ -48,20 +48,20 @@
     data: () => ({
       links: [
         {
-          href: '#',
-          text: 'Creative Tim',
+          href: 'https://www.youtube.com/channel/UC_XI3ByFO1uZIIH-g-zJZiw/videos',
+          text: 'Youtube',
         },
         {
-          href: '#',
-          text: 'About Us',
+          href: 'https://www.instagram.com/hellossafy/',
+          text: 'Instagram',
         },
         {
-          href: '#',
-          text: 'Blog',
+          href: 'https://lovelyunsh.tistory.com/',
+          text: 'blog1',
         },
         {
-          href: '#',
-          text: 'Licenses',
+          href: 'https://dogfootblog.tistory.com/',
+          text: 'blog2',
         },
       ],
     }),
