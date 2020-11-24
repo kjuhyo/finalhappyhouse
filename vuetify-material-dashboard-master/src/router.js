@@ -21,18 +21,18 @@ export default new Router({
       children: [
         // Dashboard
         {
-          name: 'Dashboard',
+          name: '소개',
           path: '',
           component: () => import('@/views/dashboard/Dashboard'),
         },
         // Pages
         {
-          name: 'User Profile',
+          name: '마이페이지',
           path: 'pages/user',
           component: () => import('@/views/dashboard/pages/UserProfile'),
         },
         {
-          name: 'Notifications',
+          name: '게시판',
           path: 'components/notifications',
           component: () => import('@/views/dashboard/component/Notifications'),
         },
@@ -65,7 +65,7 @@ export default new Router({
           component: () => import('@/views/dashboard/Upgrade'),
         },
         {
-          name: 'NewUser',
+          name: '회원가입',
           path: 'newuser',
           component: () => import('@/views/dashboard/pages/NewUser'),
         },
