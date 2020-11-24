@@ -117,9 +117,14 @@
           to: '/pages/user',
         },
         {
-          title: 'rtables',
+          title: '아파트 검색',
           icon: 'mdi-clipboard-outline',
           to: '/tables/regular-tables',
+        },
+        {
+          title: '빌라 검색',
+          icon: 'mdi-clipboard-outline',
+          to: '/tables/villa-tables',
         },
         {
           title: 'google',

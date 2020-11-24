@@ -48,9 +48,14 @@ export default new Router({
         },
         // Tables
         {
-          name: 'Regular Tables',
+          name: '아파트 검색',
           path: 'tables/regular-tables',
           component: () => import('@/views/dashboard/tables/RegularTables'),
+        },
+        {
+          name: '빌라 검색',
+          path: 'tables/villa-tables',
+          component: () => import('@/views/dashboard/tables/villaTables'),
         },
         // Maps
         {
