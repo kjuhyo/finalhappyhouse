@@ -4,8 +4,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ssafy.vue.dao.MemberMapper;
 import com.ssafy.vue.dto.MemberDto;
-import com.ssafy.vue.mapper.MemberMapper;
 
 @Service
 public class MemberServiceImpl implements MemberService {

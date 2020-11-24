@@ -1,4 +1,4 @@
-package com.ssafy.vue.mapper;
+package com.ssafy.vue.dao;
 
 import java.sql.SQLException;
 

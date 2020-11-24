@@ -35,7 +35,7 @@ public class MemberController {
 	private MemberService memberService;
 	
 	public static final Logger logger = LoggerFactory.getLogger(MemberController.class);
-
+	
 	@PostMapping("/confirm/login")
 	public ResponseEntity<Map<String, Object>> login(@RequestBody MemberDto memberDto, HttpServletResponse response, HttpSession session) {
 		Map<String, Object> resultMap = new HashMap<>();
