@@ -11,8 +11,6 @@ public class Board {
 
 	
 	
-	public Board() {
-	}
 	public Board(int no, String title, String content, String writer, Date regtime) {
 		this.no = no;
 		this.title = title;

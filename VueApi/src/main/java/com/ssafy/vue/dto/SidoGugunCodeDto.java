@@ -9,9 +9,6 @@ public class SidoGugunCodeDto {
 	private String gugunName;
 	
 	
-	public SidoGugunCodeDto() {
-	}
-
 	public SidoGugunCodeDto(String sidoCode, String sidoName) {
 		this.sidoCode = sidoCode;
 		this.sidoName = sidoName;
