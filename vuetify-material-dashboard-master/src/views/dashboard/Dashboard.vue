@@ -41,16 +41,13 @@
             </v-tooltip>
           </template>
 
-          <h4 class="card-title font-weight-light mt-2 ml-2">Website Views</h4>
-
-          <p class="d-inline-flex font-weight-light ml-2 mt-1">
-            Last Campaign Performance
-          </p>
-
+          <h4 class="card-title font-weight-light mt-2 ml-2">
+            서울 주요 구 거래평균 금액
+          </h4>
           <template v-slot:actions>
             <v-icon class="mr-1" small> mdi-clock-outline </v-icon>
             <span class="caption grey--text font-weight-light"
-              >updated 10 minutes ago</span
+              >updated 1 days ago</span
             >
           </template>
         </base-material-chart-card>
@@ -96,7 +93,7 @@
           <template v-slot:actions>
             <v-icon class="mr-1" small> mdi-clock-outline </v-icon>
             <span class="caption grey--text font-weight-light"
-              >updated 4 minutes ago</span
+              >updated 1 days ago</span
             >
           </template>
         </base-material-chart-card>
@@ -143,7 +140,7 @@
           <template v-slot:actions>
             <v-icon class="mr-1" small> mdi-clock-outline </v-icon>
             <span class="caption grey--text font-weight-light"
-              >campaign sent 26 minutes ago</span
+              >updated 1 days ago</span
             >
           </template>
         </base-material-chart-card>
@@ -194,73 +191,16 @@
         />
       </v-col>
 
-      <v-col cols="12" md="6">
+      <v-col cols="12" md="12">
         <base-material-card color="warning" class="px-5 py-3">
           <template v-slot:heading>
-            <div class="display-2 font-weight-light">Employees Stats</div>
-
-            <div class="subtitle-1 font-weight-light">
-              New employees on 15th September, 2016
+            <div class="display-2 font-weight-light">
+              {{ yearsel }}년 {{ monthsel }}월 서울 주요 구군 거래
             </div>
           </template>
           <v-card-text>
-            <v-data-table :headers="headers" :items="items" />
+            <v-data-table :headers="headers" :items="Allapts" />
           </v-card-text>
-        </base-material-card>
-      </v-col>
-
-      <v-col cols="12" md="6">
-        <base-material-card class="px-5 py-3">
-          <template v-slot:heading>
-            <v-tabs
-              v-model="tabs"
-              background-color="transparent"
-              slider-color="white"
-            >
-              <span
-                class="subheading font-weight-light mx-3"
-                style="align-self: center"
-                >Tasks:</span
-              >
-              <v-tab class="mr-3">
-                <v-icon class="mr-2"> mdi-bug </v-icon>
-                Bugs
-              </v-tab>
-              <v-tab class="mr-3">
-                <v-icon class="mr-2"> mdi-code-tags </v-icon>
-                Website
-              </v-tab>
-              <v-tab>
-                <v-icon class="mr-2"> mdi-cloud </v-icon>
-                Server
-              </v-tab>
-            </v-tabs>
-          </template>
-
-          <v-tabs-items v-model="tabs" class="transparent">
-            <v-tab-item v-for="n in 3" :key="n">
-              <v-card-text>
-                <template v-for="(task, i) in tasks[tabs]">
-                  <v-row :key="i" align="center">
-                    <v-col cols="1">
-                      <v-list-item-action>
-                        <v-checkbox v-model="task.value" color="secondary" />
-                      </v-list-item-action>
-                    </v-col>
-
-                    <v-col cols="9">
-                      <div class="font-weight-light" v-text="task.text" />
-                    </v-col>
-
-                    <v-col cols="2" class="text-right">
-                      <v-icon class="mx-1"> mdi-pencil </v-icon>
-                      <v-icon color="error" class="mx-1"> mdi-close </v-icon>
-                    </v-col>
-                  </v-row>
-                </template>
-              </v-card-text>
-            </v-tab-item>
-          </v-tabs-items>
         </base-material-card>
       </v-col>
     </v-row>
@@ -281,7 +221,6 @@ for (var i = 1; i < 13; i++) {
 export default {
   created: function () {
     this.getAlldata();
-    console.log(this.Allapts);
   },
   name: "DashboardDashboard",
 
@@ -378,14 +317,20 @@ export default {
       },
       headers: [
         {
-          sortable: false,
-          text: "ID",
-          value: "id",
+          sortable: true,
+          text: "건축년도",
+          value: "건축년도",
         },
         {
-          sortable: false,
-          text: "Name",
-          value: "name",
+          sortable: true,
+          text: "법정동",
+          value: "법정동",
+        },
+        {
+          sortable: true,
+          text: "아파트",
+          value: "아파트",
+          align: "right",
         },
         {
           sortable: true,
@@ -394,77 +339,13 @@ export default {
           align: "right",
         },
         {
-          sortable: false,
-          text: "Country",
-          value: "country",
-          align: "right",
-        },
-        {
-          sortable: false,
-          text: "City",
-          value: "city",
+          sortable: true,
+          text: "전용면적",
+          value: "전용면적",
           align: "right",
         },
       ],
-      items: this.Allapts,
       tabs: 0,
-      tasks: {
-        0: [
-          {
-            text:
-              'Sign contract for "What are conference organizers afraid of?"',
-            value: true,
-          },
-          {
-            text:
-              "Lines From Great Russian Literature? Or E-mails From My Boss?",
-            value: false,
-          },
-          {
-            text:
-              "Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit",
-            value: false,
-          },
-          {
-            text: "Create 4 Invisible User Experiences you Never Knew About",
-            value: true,
-          },
-        ],
-        1: [
-          {
-            text:
-              "Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit",
-            value: true,
-          },
-          {
-            text:
-              'Sign contract for "What are conference organizers afraid of?"',
-            value: false,
-          },
-        ],
-        2: [
-          {
-            text:
-              "Lines From Great Russian Literature? Or E-mails From My Boss?",
-            value: false,
-          },
-          {
-            text:
-              "Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit",
-            value: true,
-          },
-          {
-            text:
-              'Sign contract for "What are conference organizers afraid of?"',
-            value: true,
-          },
-        ],
-      },
-      list: {
-        0: false,
-        1: false,
-        2: false,
-      },
       places: [11680, 11650, 11170, 11710, 11200, 11215, 11440, 11590],
       Allapts: [],
     };
@@ -478,11 +359,7 @@ export default {
     getAlldata() {
       this.Allapts = [];
       this.places.forEach((element) => {
-        this.getdata(element, this.yearsel + "" + this.monthsel).forEach(
-          (a) => {
-            this.Allapts.push(a);
-          }
-        );
+        this.getdata(element, this.yearsel + "" + this.monthsel);
       });
     },
     getdata(placecode, day) {
@@ -495,8 +372,10 @@ export default {
       axios
         .get(API_URL)
         .then((response) => {
-          console.log(response);
-          return response.data.response.body.items.item;
+          console.log(response.data.response.body.items.item);
+          response.data.response.body.items.item.forEach((a) => {
+            this.Allapts.push(a);
+          });
         })
         .catch((error) => {
           console.log(error);
