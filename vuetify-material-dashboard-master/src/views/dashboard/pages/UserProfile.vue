@@ -25,11 +25,16 @@
                     <v-text-field label="User Name" class="purple-input" />
                   </v-col>
                   <v-col cols="12" md="6">
-                    <v-text-field label="Password" class="purple-input" />
+                    <v-text-field
+                      type="password"
+                      label="Password"
+                      class="purple-input"
+                    />
                   </v-col>
 
                   <v-col cols="12" md="6">
                     <v-text-field
+                      type="password"
                       label="Password Confirm"
                       class="purple-input"
                     />
@@ -144,36 +149,38 @@ Vue.use(VueRouter);
 
 export default {
   name: "Login",
-  data: function () {
+  data: function() {
     return {
       user: {
         memId: "",
-        memPwd: "",
+        memPwd: ""
       },
-      message: "잘못됨",
+      message: "잘못됨"
     };
   },
   computed: {
     ...mapGetters(["getAccessToken", "getmemId", "getmemName"]),
     nextRoute() {
-      return this.$route.params.nextRoute ? this.$route.params.nextRoute : "";
-    },
+      return this.$route.params.nextRoute
+        ? this.$route.params.nextRoute
+        : "pages/user";
+    }
   },
   methods: {
-    login: function () {
+    login: function() {
       this.$store
         .dispatch("LOGIN", this.user)
         .then(() => this.$router.replace(`/${this.nextRoute}`))
         .catch(({ message }) => (this.msg = message));
     },
-    addUser: function () {
+    addUser: function() {
       this.$router.push("/newuser");
     },
     onClickLogout() {
       this.$store
         .dispatch("LOGOUT")
-        .then(() => this.$router.replace("/").catch(() => {}));
-    },
-  },
+        .then(() => this.$router.replace("/pages/user").catch(() => {}));
+    }
+  }
 };
 </script>

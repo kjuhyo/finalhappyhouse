@@ -29,6 +29,7 @@
                 </v-col>
                 <v-col cols="12" md="6">
                   <v-text-field
+                    type="password"
                     label="Password"
                     v-model="user.memPwd"
                     class="purple-input"
@@ -36,7 +37,11 @@
                 </v-col>
 
                 <v-col cols="12" md="6">
-                  <v-text-field label="Password Confirm" class="purple-input" />
+                  <v-text-field
+                    type="password"
+                    label="Password Confirm"
+                    class="purple-input"
+                  />
                 </v-col>
 
                 <v-col cols="12">
@@ -84,28 +89,28 @@ Vue.use(VueRouter);
 
 export default {
   name: "Login",
-  data: function () {
+  data: function() {
     return {
       user: {
         memId: "",
         memPwd: "",
         memName: "",
-        memEmail: "",
+        memEmail: ""
       },
-      message: "잘못됨",
+      message: "잘못됨"
     };
   },
   methods: {
-    submit: function () {
+    submit: function() {
       axios
         .post("http://localhost:8080/VueApi/vue/user/submit", this.user)
-        .then((response) => {
-          console.log(response);
+        .then(response => {
+          this.$router.push("pages/user");
         })
-        .catch((error) => {
+        .catch(error => {
           console.log(error);
         });
-    },
-  },
+    }
+  }
 };
 </script>

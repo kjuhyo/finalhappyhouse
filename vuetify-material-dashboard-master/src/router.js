@@ -21,7 +21,7 @@ export default new Router({
       children: [
         // Dashboard
         {
-          name: '소개',
+          name: '대시보드',
           path: '',
           component: () => import('@/views/dashboard/Dashboard'),
         },
@@ -73,6 +73,16 @@ export default new Router({
           name: '회원가입',
           path: 'newuser',
           component: () => import('@/views/dashboard/pages/NewUser'),
+        },
+        {
+          name: 'read',
+          path: '/read',
+          component: () => import('@/views/dashboard/component/Read'),
+        },
+        {
+          name: 'create',
+          path: '/create',
+          component: () => import('@/views/dashboard/component/Create'),
         },
       ],
     },

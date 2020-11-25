@@ -8,9 +8,10 @@ public class Board {
 	private String content;
 	private String writer;
 	private Date regtime;
+	
+	public Board() {}
+	
 
-	
-	
 	public Board(int no, String title, String content, String writer, Date regtime) {
 		this.no = no;
 		this.title = title;
