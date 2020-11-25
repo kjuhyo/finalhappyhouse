@@ -210,12 +210,22 @@
 <script>
 import axios from "axios";
 var years = [];
-var months = [];
+var months = [
+  "01",
+  "02",
+  "03",
+  "04",
+  "05",
+  "06",
+  "07",
+  "08",
+  "09",
+  "10",
+  "11",
+  "12",
+];
 for (var i = 2000; i < 2021; i++) {
   years.push(i);
-}
-for (var i = 1; i < 13; i++) {
-  months.push(i);
 }
 
 export default {
@@ -229,18 +239,27 @@ export default {
       year: years,
       month: months,
       yearsel: 2020,
-      monthsel: 11,
+      monthsel: "11",
       dailySalesChart: {
         data: {
-          labels: ["M", "T", "W", "T", "F", "S", "S"],
-          series: [[12, 17, 7, 17, 23, 18, 38]],
+          labels: [
+            "강남구",
+            "서초구",
+            "용산구",
+            "송파구",
+            "성동구",
+            "광진구",
+            "마포구",
+            "동작구",
+          ],
+          series: this.totalCount,
         },
         options: {
           lineSmooth: this.$chartist.Interpolation.cardinal({
             tension: 0,
           }),
           low: 0,
-          high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
+          high: 1000, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
           chartPadding: {
             top: 0,
             right: 0,
@@ -271,22 +290,16 @@ export default {
       emailsSubscriptionChart: {
         data: {
           labels: [
-            "Ja",
-            "Fe",
-            "Ma",
-            "Ap",
-            "Mai",
-            "Ju",
-            "Jul",
-            "Au",
-            "Se",
-            "Oc",
-            "No",
-            "De",
+            "강남구",
+            "서초구",
+            "용산구",
+            "송파구",
+            "성동구",
+            "광진구",
+            "마포구",
+            "동작구",
           ],
-          series: [
-            [300, 443, 320, 780, 553, 453, 326, 434, 568, 610, 756, 895],
-          ],
+          series: [[300, 443, 320, 780, 553, 453, 326, 434]],
         },
         options: {
           axisX: {
@@ -318,8 +331,18 @@ export default {
       headers: [
         {
           sortable: true,
-          text: "건축년도",
-          value: "건축년도",
+          text: "거래 년",
+          value: "년",
+        },
+        {
+          sortable: true,
+          text: "월",
+          value: "월",
+        },
+        {
+          sortable: true,
+          text: "일",
+          value: "일",
         },
         {
           sortable: true,
@@ -330,24 +353,22 @@ export default {
           sortable: true,
           text: "아파트",
           value: "아파트",
-          align: "right",
         },
         {
           sortable: true,
           text: "거래금액",
           value: "거래금액",
-          align: "right",
         },
         {
           sortable: true,
           text: "전용면적",
           value: "전용면적",
-          align: "right",
         },
       ],
       tabs: 0,
       places: [11680, 11650, 11170, 11710, 11200, 11215, 11440, 11590],
       Allapts: [],
+      countApt: [],
     };
   },
 
@@ -358,9 +379,11 @@ export default {
 
     getAlldata() {
       this.Allapts = [];
+      this.countApt = [];
       this.places.forEach((element) => {
         this.getdata(element, this.yearsel + "" + this.monthsel);
       });
+      console.log(this.countApt);
     },
     getdata(placecode, day) {
       const API_URL =
@@ -372,10 +395,10 @@ export default {
       axios
         .get(API_URL)
         .then((response) => {
-          console.log(response.data.response.body.items.item);
           response.data.response.body.items.item.forEach((a) => {
             this.Allapts.push(a);
           });
+          this.countApt.push(parseInt(response.data.response.body.totalCount));
         })
         .catch((error) => {
           console.log(error);
