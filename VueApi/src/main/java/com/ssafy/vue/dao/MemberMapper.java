@@ -10,5 +10,8 @@ import com.ssafy.vue.dto.MemberDto;
 public interface MemberMapper {
 
 	public MemberDto login(MemberDto memberDto) throws SQLException;
+	public void update(MemberDto memberDto) throws SQLException;
+	public void insert(MemberDto memberDto) throws SQLException;
+	public void delete(MemberDto memberDto) throws SQLException;
 	
 }

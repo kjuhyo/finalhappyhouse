@@ -15,9 +15,12 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Override
 	public MemberDto login(MemberDto memberDto) throws Exception {
-		MemberDto a = sqlSession.getMapper(MemberMapper.class).login(memberDto);
-		System.out.println(a);
-		return a;
+		return sqlSession.getMapper(MemberMapper.class).login(memberDto);
+	}
+	
+	@Override
+	public void submit(MemberDto memberDto) throws Exception {
+		sqlSession.getMapper(MemberMapper.class).insert(memberDto);
 	}
 	
 

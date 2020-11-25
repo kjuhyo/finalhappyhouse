@@ -35,14 +35,25 @@ public class MemberController {
 	private MemberService memberService;
 	
 	public static final Logger logger = LoggerFactory.getLogger(MemberController.class);
-	
+	@PostMapping("/submit")
+	public void submit(@RequestBody MemberDto memberDto, HttpServletResponse response, HttpSession session) {
+		Map<String, Object> resultMap = new HashMap<>();
+		HttpStatus status = null;
+		try {
+			memberService.submit(memberDto);
+			resultMap.put("message","success");
+		} catch (Exception e) {
+			resultMap.put("message", e.getMessage());
+			System.out.println(e.getMessage());
+			status = HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+	}
 	@PostMapping("/confirm/login")
 	public ResponseEntity<Map<String, Object>> login(@RequestBody MemberDto memberDto, HttpServletResponse response, HttpSession session) {
 		Map<String, Object> resultMap = new HashMap<>();
 		HttpStatus status = null;
 		try {
 			MemberDto loginUser = memberService.login(memberDto);
-			
 			if(loginUser != null) {
 //				jwt.io에서 확인
 //				로그인 성공했다면 토큰을 생성한다.

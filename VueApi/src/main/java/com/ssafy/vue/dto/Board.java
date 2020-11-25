@@ -9,6 +9,17 @@ public class Board {
 	private String writer;
 	private Date regtime;
 
+	
+	
+	public Board() {
+	}
+	public Board(int no, String title, String content, String writer, Date regtime) {
+		this.no = no;
+		this.title = title;
+		this.content = content;
+		this.writer = writer;
+		this.regtime = regtime;
+	}
 	public int getNo() {
 		return no;
 	}

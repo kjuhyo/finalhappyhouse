@@ -16,7 +16,7 @@
 		where memId = #{memId} and memPwd = #{memPwd}
 	</select>
 	
-	<insert id="insert" parameterType="MemberDto">
+	<insert id="insert">
 		insert into member values(#{memId}, #{memPwd}, #{memName}, #{memEmail})
 	</insert>
 	

@@ -46,6 +46,7 @@ export default new Vuex.Store({
   },
   actions: {
     LOGIN(context, mem) {
+      console.log(mem.memId, mem.memPwd);
       return axios
         .post(`${SERVER_URL}/user/confirm/login`, mem)
         .then((response) => {

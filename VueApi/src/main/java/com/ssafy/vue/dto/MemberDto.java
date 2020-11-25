@@ -19,6 +19,18 @@ public class MemberDto {
 	private String memName;
 	private String memEmail;
 
+	
+	
+	public MemberDto() {
+	}
+
+	public MemberDto(String memId, String memPwd, String memName, String memEmail) {
+		this.memId = memId;
+		this.memPwd = memPwd;
+		this.memName = memName;
+		this.memEmail = memEmail;
+	}
+
 	public String getMemId() {
 		return memId;
 	}
