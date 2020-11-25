@@ -277,7 +277,12 @@ for (var i = 2000; i < 2021; i++) {
 for (var i = 1; i < 13; i++) {
   months.push(i);
 }
+
 export default {
+  created: function () {
+    this.getAlldata();
+    console.log(this.Allapts);
+  },
   name: "DashboardDashboard",
 
   data() {
@@ -384,8 +389,8 @@ export default {
         },
         {
           sortable: true,
-          text: "Salary",
-          value: "salary",
+          text: "거래금액",
+          value: "거래금액",
           align: "right",
         },
         {
@@ -401,57 +406,7 @@ export default {
           align: "right",
         },
       ],
-      items: [
-        {
-          id: 1,
-          name: "Dakota Rice",
-          country: "Niger",
-          city: "Oud-Tunrhout",
-          salary: "$35,738",
-        },
-        {
-          id: 2,
-          name: "Minerva Hooper",
-          country: "Curaçao",
-          city: "Sinaai-Waas",
-          salary: "$23,738",
-        },
-        {
-          id: 3,
-          name: "Sage Rodriguez",
-          country: "Netherlands",
-          city: "Overland Park",
-          salary: "$56,142",
-        },
-        {
-          id: 4,
-          name: "Philip Chanley",
-          country: "Korea, South",
-          city: "Gloucester",
-          salary: "$38,735",
-        },
-        {
-          id: 5,
-          name: "Doris Greene",
-          country: "Malawi",
-          city: "Feldkirchen in Kārnten",
-          salary: "$63,542",
-        },
-        {
-          id: 5,
-          name: "Doris Greene",
-          country: "Malawi",
-          city: "Feldkirchen in Kārnten",
-          salary: "$63,542",
-        },
-        {
-          id: 5,
-          name: "Doris Greene",
-          country: "Malawi",
-          city: "Feldkirchen in Kārnten",
-          salary: "$63,542",
-        },
-      ],
+      items: this.Allapts,
       tabs: 0,
       tasks: {
         0: [
@@ -510,12 +465,25 @@ export default {
         1: false,
         2: false,
       },
+      places: [11680, 11650, 11170, 11710, 11200, 11215, 11440, 11590],
+      Allapts: [],
     };
   },
 
   methods: {
     complete(index) {
       this.list[index] = !this.list[index];
+    },
+
+    getAlldata() {
+      this.Allapts = [];
+      this.places.forEach((element) => {
+        this.getdata(element, this.yearsel + "" + this.monthsel).forEach(
+          (a) => {
+            this.Allapts.push(a);
+          }
+        );
+      });
     },
     getdata(placecode, day) {
       const API_URL =
@@ -524,7 +492,15 @@ export default {
         "&DEAL_YMD=" +
         day;
 
-      axios.get(API_URL).then((response) => {});
+      axios
+        .get(API_URL)
+        .then((response) => {
+          console.log(response);
+          return response.data.response.body.items.item;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
   },
 };
