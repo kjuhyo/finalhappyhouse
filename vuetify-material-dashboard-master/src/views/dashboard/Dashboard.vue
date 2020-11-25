@@ -78,11 +78,6 @@
             서울 주요 구 거래량
           </h4>
 
-          <p class="d-inline-flex font-weight-light ml-2 mt-1">
-            <v-icon color="green" small> mdi-arrow-up </v-icon>
-            <span class="green--text">55%</span>&nbsp; increase in today's sales
-          </p>
-
           <template v-slot:actions>
             <v-icon class="mr-1" small> mdi-clock-outline </v-icon>
             <span class="caption grey--text font-weight-light"
@@ -100,7 +95,7 @@
         <base-material-stats-card
           color="primary"
           icon="mdi-poll"
-          title="총거래횟수"
+          title="주요구군 거래 횟수"
           :value="aptcount"
           sub-icon="mdi-tag"
           sub-text="Tracked from Google Analytics"
@@ -111,7 +106,7 @@
         <base-material-stats-card
           color="success"
           icon="mdi-store"
-          title="총거래금액"
+          title="주요구군 총 거래금액(원)"
           :value="fullamount"
           sub-icon="mdi-calendar"
           sub-text="Last 30 Days"
@@ -123,7 +118,7 @@
           color="orange"
           icon="mdi-sofa"
           title="좋아요"
-          value="184"
+          value="2000000"
           sub-icon="mdi-alert"
           sub-icon-color="red"
           sub-text="Get More Space..."
@@ -199,26 +194,7 @@ export default {
             tension: 0,
           }),
           low: 0,
-          high: 150, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
-          chartPadding: {
-            top: 0,
-            right: 0,
-            bottom: 0,
-            left: 0,
-          },
-        },
-      },
-      dataCompletedTasksChart: {
-        data: {
-          labels: ["12am", "3pm", "6pm", "9pm", "12pm", "3am", "6am", "9am"],
-          series: [[230, 750, 450, 300, 280, 240, 200, 190]],
-        },
-        options: {
-          lineSmooth: this.$chartist.Interpolation.cardinal({
-            tension: 0,
-          }),
-          low: 0,
-          high: 10000, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
+          high: this.maxcount, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
           chartPadding: {
             top: 0,
             right: 0,
@@ -246,7 +222,7 @@ export default {
             showGrid: false,
           },
           low: 0,
-          high: 2500,
+          high: this.maxamount,
           chartPadding: {
             top: 0,
             right: 5,
@@ -320,7 +296,6 @@ export default {
     picker: function (val) {
       this.yearsel = val.substr(0, 4);
       this.monthsel = val.substr(5, 6);
-      console.log(this.dailySalesChart.data.series);
       this.getAlldata();
     },
   },
@@ -333,11 +308,15 @@ export default {
       this.Allapts = [];
       this.countApt = [];
       this.amountApt = [];
+
       this.aptcountnum = 0;
+
       this.fullamountnum = 0;
       this.places.forEach((element) => {
         this.getdata(element, this.yearsel + "" + this.monthsel);
       });
+      this.maxcount = Math.max.apply(null, this.countApt) + 100;
+      this.maxamount = Math.max.apply(null, this.amountApt) + 1000;
       this.dailySalesChart.data.series = [this.countApt];
       this.emailsSubscriptionChart.data.series = [this.amountApt];
     },
