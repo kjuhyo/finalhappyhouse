@@ -1,15 +1,6 @@
 <template>
   <v-container id="dashboard" fluid tag="section">
     <v-row>
-      <v-col cols="8"></v-col>
-      <v-col
-        ><v-select v-model="yearsel" :items="year" label="년"></v-select
-      ></v-col>
-      <v-col
-        ><v-select v-model="monthsel" :items="month" label="월"></v-select
-      ></v-col>
-    </v-row>
-    <v-row>
       <v-col cols="12" lg="4">
         <base-material-chart-card
           :data="emailsSubscriptionChart.data"
@@ -83,7 +74,9 @@
             </v-tooltip>
           </template>
 
-          <h4 class="card-title font-weight-light mt-2 ml-2">Daily Sales</h4>
+          <h4 class="card-title font-weight-light mt-2 ml-2">
+            서울 주요 구 거래량
+          </h4>
 
           <p class="d-inline-flex font-weight-light ml-2 mt-1">
             <v-icon color="green" small> mdi-arrow-up </v-icon>
@@ -99,91 +92,37 @@
         </base-material-chart-card>
       </v-col>
 
-      <v-col cols="12" lg="4">
-        <base-material-chart-card
-          :data="dataCompletedTasksChart.data"
-          :options="dataCompletedTasksChart.options"
-          hover-reveal
-          color="info"
-          type="Line"
-        >
-          <template v-slot:reveal-actions>
-            <v-tooltip bottom>
-              <template v-slot:activator="{ attrs, on }">
-                <v-btn v-bind="attrs" color="info" icon v-on="on">
-                  <v-icon color="info"> mdi-refresh </v-icon>
-                </v-btn>
-              </template>
-
-              <span>Refresh</span>
-            </v-tooltip>
-
-            <v-tooltip bottom>
-              <template v-slot:activator="{ attrs, on }">
-                <v-btn v-bind="attrs" light icon v-on="on">
-                  <v-icon>mdi-pencil</v-icon>
-                </v-btn>
-              </template>
-
-              <span>Change Date</span>
-            </v-tooltip>
-          </template>
-
-          <h3 class="card-title font-weight-light mt-2 ml-2">
-            Completed Tasks
-          </h3>
-
-          <p class="d-inline-flex font-weight-light ml-2 mt-1">
-            Last Last Campaign Performance
-          </p>
-
-          <template v-slot:actions>
-            <v-icon class="mr-1" small> mdi-clock-outline </v-icon>
-            <span class="caption grey--text font-weight-light"
-              >updated 1 days ago</span
-            >
-          </template>
-        </base-material-chart-card>
+      <v-col cols="12" lg="4" align="center">
+        <v-date-picker v-model="picker" type="month"></v-date-picker>
       </v-col>
 
-      <v-col cols="12" sm="6" lg="3">
-        <base-material-stats-card
-          color="info"
-          icon="mdi-twitter"
-          title="Followers"
-          value="+245"
-          sub-icon="mdi-clock"
-          sub-text="Just Updated"
-        />
-      </v-col>
-
-      <v-col cols="12" sm="6" lg="3">
+      <v-col cols="12" sm="6" lg="4">
         <base-material-stats-card
           color="primary"
           icon="mdi-poll"
-          title="Website Visits"
-          value="75.521"
+          title="총거래횟수"
+          :value="aptcount"
           sub-icon="mdi-tag"
           sub-text="Tracked from Google Analytics"
         />
       </v-col>
 
-      <v-col cols="12" sm="6" lg="3">
+      <v-col cols="12" sm="6" lg="4">
         <base-material-stats-card
           color="success"
           icon="mdi-store"
-          title="Revenue"
-          value="$ 34,245"
+          title="총거래금액"
+          :value="fullamount"
           sub-icon="mdi-calendar"
-          sub-text="Last 24 Hours"
+          sub-text="Last 30 Days"
         />
       </v-col>
 
-      <v-col cols="12" sm="6" lg="3">
+      <v-col cols="12" sm="6" lg="4">
         <base-material-stats-card
           color="orange"
           icon="mdi-sofa"
-          title="Bookings"
+          title="좋아요"
           value="184"
           sub-icon="mdi-alert"
           sub-icon-color="red"
@@ -236,6 +175,7 @@ export default {
 
   data() {
     return {
+      picker: new Date().toISOString().substr(0, 10),
       year: years,
       month: months,
       yearsel: 2020,
@@ -252,14 +192,14 @@ export default {
             "마포구",
             "동작구",
           ],
-          series: this.totalCount,
+          series: [[1, 2, 3, 4, 5, 6, 7, 8]],
         },
         options: {
           lineSmooth: this.$chartist.Interpolation.cardinal({
             tension: 0,
           }),
           low: 0,
-          high: 1000, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
+          high: 150, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
           chartPadding: {
             top: 0,
             right: 0,
@@ -278,7 +218,7 @@ export default {
             tension: 0,
           }),
           low: 0,
-          high: 1000, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
+          high: 10000, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
           chartPadding: {
             top: 0,
             right: 0,
@@ -306,7 +246,7 @@ export default {
             showGrid: false,
           },
           low: 0,
-          high: 1000,
+          high: 2500,
           chartPadding: {
             top: 0,
             right: 5,
@@ -369,9 +309,21 @@ export default {
       places: [11680, 11650, 11170, 11710, 11200, 11215, 11440, 11590],
       Allapts: [],
       countApt: [],
+      amountApt: [],
+      aptcount: "0",
+      aptcountnum: 0,
+      fullamount: "0",
+      fullamountnum: 0,
     };
   },
-
+  watch: {
+    picker: function (val) {
+      this.yearsel = val.substr(0, 4);
+      this.monthsel = val.substr(5, 6);
+      console.log(this.dailySalesChart.data.series);
+      this.getAlldata();
+    },
+  },
   methods: {
     complete(index) {
       this.list[index] = !this.list[index];
@@ -380,14 +332,24 @@ export default {
     getAlldata() {
       this.Allapts = [];
       this.countApt = [];
+      this.amountApt = [];
+      this.aptcountnum = 0;
+      this.fullamountnum = 0;
       this.places.forEach((element) => {
         this.getdata(element, this.yearsel + "" + this.monthsel);
       });
-      console.log(this.countApt);
+      this.dailySalesChart.data.series = [this.countApt];
+      this.emailsSubscriptionChart.data.series = [this.amountApt];
     },
     getdata(placecode, day) {
+      const API_KEY =
+        "UzlzGSkGFVAEyXGrO0GzbQ17HBeJ2CntOm1FQzcdlSBh%2Fm%2BXGI5VL8f9gc6oCcN%2B2pMcP4pF4Mq%2FCO6fpIo4ww%3D%3D";
+      const API_KEY2 =
+        "aCxmYY6fT6MMq7m8OMA7NIF5YzME2immau68Y%2Bcmqfv6JSfBLszsF%2BDEhqjN0Ux5F6kkgDUQXyGelcWP%2F4LbeA%3D%3D";
       const API_URL =
-        "http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev?serviceKey=aCxmYY6fT6MMq7m8OMA7NIF5YzME2immau68Y%2Bcmqfv6JSfBLszsF%2BDEhqjN0Ux5F6kkgDUQXyGelcWP%2F4LbeA%3D%3D&pageNo=1&numOfRows=1000&LAWD_CD=" +
+        "http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev?serviceKey=" +
+        API_KEY +
+        "&pageNo=1&numOfRows=1000&LAWD_CD=" +
         placecode +
         "&DEAL_YMD=" +
         day;
@@ -395,10 +357,19 @@ export default {
       axios
         .get(API_URL)
         .then((response) => {
+          var amountt = 0;
           response.data.response.body.items.item.forEach((a) => {
+            amountt = amountt + parseInt(a.거래금액.replace(",", "")) / 100;
+            this.fullamountnum =
+              this.fullamountnum + parseInt(a.거래금액.replace(",", "")) * 1000;
+            this.fullamount = "" + this.fullamountnum;
             this.Allapts.push(a);
           });
-          this.countApt.push(parseInt(response.data.response.body.totalCount));
+          var num = parseInt(response.data.response.body.totalCount);
+          this.amountApt.push(amountt / num);
+          this.aptcountnum = this.aptcountnum + num;
+          this.aptcount = "" + this.aptcountnum;
+          this.countApt.push(num);
         })
         .catch((error) => {
           console.log(error);
