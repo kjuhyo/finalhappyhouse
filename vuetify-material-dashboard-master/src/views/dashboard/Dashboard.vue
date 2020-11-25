@@ -95,7 +95,7 @@
         <base-material-stats-card
           color="primary"
           icon="mdi-poll"
-          title="주요구군 거래 횟수"
+          title="주요구군 거래 총 횟수"
           :value="aptcount"
           sub-icon="mdi-tag"
           sub-text="Tracked from Google Analytics"
