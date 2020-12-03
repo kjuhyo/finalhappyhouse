@@ -45,7 +45,17 @@
                 </tr>
               </table>
             </v-card-text>
-            <v-btn color="success" class="mr-0" @click="movePage"> 등록</v-btn>
+            <v-btn
+              v-if="getAccessToken"
+              id="user-profile"
+              fluid
+              tag="section"
+              color="success"
+              class="mr-0"
+              @click="movePage"
+            >
+              등록</v-btn
+            >
           </v-card>
         </v-col>
       </v-row>
@@ -58,6 +68,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import axios from "axios";
 import moment from "moment";
+import { mapGetters } from "vuex";
 
 export default {
   name: "DashboardNotifications",
@@ -76,6 +87,13 @@ export default {
     //parsedDirection () {
     //  return this.direction.split(' ')
     //},
+
+    ...mapGetters(["getAccessToken", "getmemId", "getmemName"]),
+    nextRoute() {
+      return this.$route.params.nextRoute
+        ? this.$route.params.nextRoute
+        : "pages/user";
+    }
   },
   created() {
     axios
