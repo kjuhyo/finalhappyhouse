@@ -51,16 +51,6 @@
       <!-- https://github.com/vuetifyjs/vuetify/pull/8574 -->
       <div />
     </v-list>
-
-    <template v-slot:append>
-      <base-item
-        :item="{
-          title: $t('upgrade'),
-          icon: 'mdi-package-up',
-          to: '/upgrade'
-        }"
-      />
-    </template>
   </v-navigation-drawer>
 </template>
 
@@ -74,8 +64,8 @@ export default {
   props: {
     expandOnHover: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
 
   data: () => ({
@@ -83,34 +73,34 @@ export default {
       {
         icon: "mdi-view-dashboard",
         title: "대시보드",
-        to: "/"
+        to: "/",
       },
       {
         icon: "mdi-account",
         title: "마이페이지",
-        to: "/pages/user"
+        to: "/pages/user",
       },
       {
         title: "아파트 검색",
         icon: "mdi-clipboard-outline",
-        to: "/tables/regular-tables"
+        to: "/tables/regular-tables",
       },
       {
         title: "빌라 검색",
         icon: "mdi-clipboard-outline",
-        to: "/tables/villa-tables"
+        to: "/tables/villa-tables",
       },
       {
         title: "google",
         icon: "mdi-map-marker",
-        to: "/maps/google-maps"
+        to: "/maps/google-maps",
       },
       {
         title: "게시판",
         icon: "mdi-clipboard-outline",
-        to: "/components/notifications"
-      }
-    ]
+        to: "/components/notifications",
+      },
+    ],
   }),
 
   computed: {
@@ -121,7 +111,7 @@ export default {
       },
       set(val) {
         this.$store.commit("SET_DRAWER", val);
-      }
+      },
     },
     computedItems() {
       return this.items.map(this.mapItem);
@@ -129,9 +119,9 @@ export default {
     profile() {
       return {
         avatar: true,
-        title: this.$t("avatar")
+        title: this.$t("avatar"),
       };
-    }
+    },
   },
 
   methods: {
@@ -139,10 +129,10 @@ export default {
       return {
         ...item,
         children: item.children ? item.children.map(this.mapItem) : undefined,
-        title: this.$t(item.title)
+        title: this.$t(item.title),
       };
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -161,12 +151,12 @@ export default {
       width: 20px
 
       +ltr()
-        margin-right: 24px
-        margin-left: 12px !important
+      margin-right: 24px
+      margin-left: 12px !important
 
       +rtl()
-        margin-left: 24px
-        margin-right: 12px !important
+      margin-left: 24px
+      margin-right: 12px !important
 
   .v-list--dense
     .v-list-item
@@ -177,17 +167,17 @@ export default {
   .v-list-group--sub-group
     .v-list-item
       +ltr()
-        padding-left: 8px
+      padding-left: 8px
 
       +rtl()
-        padding-right: 8px
+      padding-right: 8px
 
     .v-list-group__header
       +ltr()
-        padding-right: 0
+      padding-right: 0
 
       +rtl()
-        padding-right: 0
+      padding-right: 0
 
       .v-list-item__icon--text
         margin-top: 19px
@@ -197,8 +187,8 @@ export default {
         order: 2
 
         +ltr()
-          margin-right: 8px
+        margin-right: 8px
 
         +rtl()
-          margin-left: 8px
+        margin-left: 8px
 </style>
